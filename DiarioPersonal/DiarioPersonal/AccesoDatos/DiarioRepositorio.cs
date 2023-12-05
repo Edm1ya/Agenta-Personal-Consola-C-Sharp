@@ -12,6 +12,37 @@ public class DiarioRepositorio{
     {
         conexion = new ConexionBD();
     }
+
+    public void CrearBD()
+    {
+
+        using (var connection = conexion.CrearConexion())
+        {
+            connection.Open();
+
+            // Nombre de la tabla que deseas crear
+            string tableName = "registros";
+
+            // Sentencia SQL para crear la tabla si no existe
+            string createTableQuery = $"IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{tableName}') " +
+                                      $"CREATE TABLE {tableName} ( " +
+                                      $"Id INT PRIMARY KEY IDENTITY, " +
+                                      $"Fecha DATE NOT NULL, " +
+                                      $"Titulo NVARCHAR(100) NOT NULL, " +
+                                      $"Contenido NVARCHAR(MAX) NOT NULL, " +
+                                      $"Categoria NVARCHAR(50) NOT NULL, " +
+                                      $"estado_animo NVARCHAR(50) NOT NULL " +
+                                      $");";
+
+            using (SqlCommand command = new SqlCommand(createTableQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+
+            Console.WriteLine($"La tabla {tableName} ha sido creada si no existía.");
+        }
+    }
+
     public List<Registro> ListarRegistrosBD()
     {
         List<Registro> registros = new List<Registro>();

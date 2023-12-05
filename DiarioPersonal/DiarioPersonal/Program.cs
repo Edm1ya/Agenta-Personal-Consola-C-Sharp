@@ -1,4 +1,5 @@
-﻿using DiarioPersonal.Modelos;
+﻿using DiarioPersonal.AccesoDatos;
+using DiarioPersonal.Modelos;
 using DiarioPersonal.Servicios;
 
 public class Program
@@ -11,7 +12,8 @@ public class Program
         List<Registro> registros = new List<Registro>();
         DiarioServicio diarioServicio = new DiarioServicio();
         int indice;
-
+        DiarioRepositorio diarioRepositorio = new DiarioRepositorio();
+        diarioRepositorio.CrearBD();
 
         // alimenta a la clase Diario con la informacion de la base de datos
         diarioServicio.ActualizarRegistros();
