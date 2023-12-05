@@ -1,6 +1,7 @@
 using DiarioPersonal.AccesoDatos;
 using Microsoft.Data.SqlClient;
 using DiarioPersonal.Modelos;
+using Microsoft.Win32;
 
 //Clase encargada de los metodos para Listas, Crear, Eliminar y Modificar registros de la base de datos
 public class DiarioRepositorio{
@@ -95,7 +96,39 @@ public class DiarioRepositorio{
             command.ExecuteNonQuery();
             conex.Close();
         }
-    }  
+    }
+
+    public List<Registro> FiltarRegistrosBD(DateTime fechaAFiltrar)
+    {
+        List<Registro> registros = new List<Registro>();
+
+        string query = "select fecha, titulo, contenido, categoria, estado_animo from registros where fecha=@fecha ";
+
+        using (var conex = conexion.CrearConexion())
+        {
+            SqlCommand command = new SqlCommand(query, conex);
+            command.Parameters.AddWithValue("@fecha", fechaAFiltrar);
+            conex.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DateTime fecha = reader.GetDateTime(0);
+                string titulo = reader.GetString(1);
+                string contenido = reader.GetString(2);
+                string categoria = reader.GetString(3);
+                string estadoAnimo = reader.GetString(4);
+                Registro registroFiltrado = new Registro(fecha, titulo, contenido, categoria, estadoAnimo);
+
+                registros.Add(registroFiltrado);
+            }
+            reader.Close();
+            conex.Close();
+
+        }
+        return registros;
+    }
 
     public int ObtenerId(Registro registro)
     {

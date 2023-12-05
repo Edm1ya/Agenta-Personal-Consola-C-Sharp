@@ -72,7 +72,7 @@ public class Program
                     "  Maestra: Betsabe Martinez \n   Seccion: 10\n\n   CREADORES\n "+
                     "  Edward Emilio Minaya Riva    100434130\n "+
                     "  Miguel Angel Sosa Paulino    100615597\n "+
-                    "  Alfredo Junior Feliz Baez    100530543\r\n "+
+                    "  Glimmer Méndez López         100193595\r\n " +
                     "╚══════════════════════════════════════════════╝");
                 Console.WriteLine("\n  ► 1. - Volver Atras\n  ► 2. - Salir");
                 Console.Write("\n  Digite una opcion: ");
@@ -145,10 +145,21 @@ public class Program
                         if (indice != -2)
                         {
                             registro = intefaz.AgregarRegistro();
-                            diarioServicio.ModificarRegistro(registro, indice);
-                            Console.WriteLine("El Registro a sido modificado");
+                            if(registro != null)
+                            {
+                                diarioServicio.ModificarRegistro(registro, indice);
+                                Console.WriteLine("El Registro a sido modificado");
+                            }
                         }
                         break; 
+
+                    case "5":
+                        intefaz.Titulo();
+                        Console.WriteLine("Filtrar Registro\n");
+                        DateTime fechaAFiltar = intefaz.ModificarRegistro();
+                        registros = diarioServicio.FiltarRegistros(fechaAFiltar);
+                        intefaz.ListarRegistros(registros);
+                        break;
 
                     case "6":
                         Menu();

@@ -60,5 +60,10 @@ namespace DiarioPersonal.Servicios
 
            return  registrosPorListar;
         }
+
+        public List<Registro> FiltarRegistros(DateTime fechaAFiltrar)
+        {
+            return diarioRepositorio.FiltarRegistrosBD(fechaAFiltrar);
+        }
     }
 }

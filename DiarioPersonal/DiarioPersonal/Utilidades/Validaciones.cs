@@ -82,7 +82,7 @@ namespace DiarioPersonal.Utilidades
             string contenido;
             do
             {
-                Console.Write("Titulo: ");
+                Console.Write("Contenido: ");
                 contenido = Console.ReadLine() ?? "";
                 if (contenido.Count() <= cantTitulo)
                 {

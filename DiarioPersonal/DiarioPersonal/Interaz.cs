@@ -35,6 +35,7 @@ public class Intefaz
             "\n ► 2. - Agregar Registros" +
             "\n ► 3. - Eliminar Registros" +
             "\n ► 4. - Modificar Registros" +
+            "\n ► 5. - Filtrar Registros" +
             "\n___________________________________________________" +
             "\n___________________________________________________" +
             "\n\n ► 6. - Volver Atras" +
@@ -128,14 +129,13 @@ public class Intefaz
 
     public DateTime ModificarRegistro()
     {
-        int cont = 0;
-        Console.WriteLine("\n Ingrese la fecha del dato que desea eliminar");
+        Console.WriteLine("\n Ingrese la fecha del dato que desea modificar");
         bool fechaValida = false;
         DateTime fecha;
         do{
             Console.Write("Fecha Formato [dd/MM/yyyy]: ");
             string? imputfecha = Console.ReadLine();
-            cont ++;
+
             if(DateTime.TryParse(imputfecha, out fecha))
             {
                 fechaValida = true;
@@ -144,11 +144,7 @@ public class Intefaz
             {
                 Console.WriteLine("formato de fecha incorrecto");
             }
-            if(cont == 3)
-            {
-                Console.WriteLine("Alcanzo el limite de intentos");
-            }
-        }while(!fechaValida && cont != 3);
+        }while(!fechaValida);
         
         return fecha;
     }
