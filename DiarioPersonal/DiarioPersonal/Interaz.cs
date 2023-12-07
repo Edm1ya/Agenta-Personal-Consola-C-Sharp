@@ -91,7 +91,6 @@ public class Intefaz
         return registro;
     }
 
-// colocar expeciones para cuando se oprimas teclas incorrectas
     public int EliminarRegistro( int cantidadRegistros)
     {
         Console.WriteLine("\nELIMINAR ENTRADA DEL DIARIO\n");
@@ -118,7 +117,7 @@ public class Intefaz
             }
             else
             {
-                Console.WriteLine("Indice  incorrecto");
+                Console.WriteLine("Indice incorrecto");
                 Console.ReadKey();
                 Console.Write(" Ingrese el indice []: ");
             }
@@ -130,6 +129,8 @@ public class Intefaz
     public DateTime ModificarRegistro()
     {
         Console.WriteLine("\n Ingrese la fecha del dato que desea modificar");
+        Console.WriteLine(" Ingrese el indice que desea borrar o X para salir");
+        Console.Write("> ");
         bool fechaValida = false;
         DateTime fecha;
         do{
@@ -147,5 +148,15 @@ public class Intefaz
         }while(!fechaValida);
         
         return fecha;
+    }
+
+    public void DetalleRegistro(Registro registro) 
+    {
+        Console.Clear();
+        Titulo();
+        Console.WriteLine(registro.Fecha.ToString("dd-MM-yyyy"));
+        Console.WriteLine($"{registro.Titulo}\n");
+        Console.WriteLine(registro.Contenido);
+        Console.WriteLine($"\nCategoria: {registro.Categoria} Estado de animos: {registro.EstadoDeAnimo}");
     }
 }

@@ -10,7 +10,7 @@ namespace DiarioPersonal.Utilidades
         public Validaciones()
         {
             this.cantTitulo = 100; 
-            this.cantContenido = 500;
+            this.cantContenido = 1000;
         }
 
         public DateTime ValidarFecha()

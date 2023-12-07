@@ -74,6 +74,41 @@ public class DiarioRepositorio{
         }
         return registros;
     }
+    public Registro getRegistro(int id)
+    {
+        string query = "select fecha, titulo, contenido, categoria, estado_animo from registros where id=@id";
+        Registro registro = null;
+
+        try
+        {
+            using (var conex = conexion.CrearConexion())
+            {
+                conex.Open();
+                SqlCommand command = new SqlCommand(query, conex);
+                command.Parameters.AddWithValue("@id", id);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    DateTime fecha = reader.GetDateTime(0);
+                    string titulo = reader.GetString(1);
+                    string contenido = reader.GetString(2);
+                    string categoria = reader.GetString(3);
+                    string estadoAnimo = reader.GetString(4);
+                    registro = new Registro(fecha, titulo, contenido, categoria, estadoAnimo);
+                }
+                reader.Close();
+                command.ExecuteNonQuery();
+                conex.Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al obtener registro{ex.Message}");
+        }
+        return registro;
+    }
 
     public void Agregar(Registro registro)
     {
@@ -189,4 +224,5 @@ public class DiarioRepositorio{
 
         return indice;
     }  
+
 }

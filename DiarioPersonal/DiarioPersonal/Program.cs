@@ -112,7 +112,14 @@ public class Program
                         intefaz.Titulo();
                         registros = diarioServicio.ListarRegistros();
                         intefaz.ListarRegistros(registros);
-
+                        indice = intefaz.EliminarRegistro(diarioServicio.ListarRegistros().Count);
+                        if (indice != -2)
+                        {
+                            registro = diarioServicio.GetRegistro(indice);
+                            Console.WriteLine("Detalle del Registro");
+                            intefaz.DetalleRegistro(registro);
+                        }
+                        
                         break;
 
                     case "2":

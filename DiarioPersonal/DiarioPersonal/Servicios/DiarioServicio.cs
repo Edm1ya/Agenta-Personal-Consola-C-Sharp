@@ -65,5 +65,12 @@ namespace DiarioPersonal.Servicios
         {
             return diarioRepositorio.FiltarRegistrosBD(fechaAFiltrar);
         }
+
+        public Registro GetRegistro(int id)
+        {
+            registros = diario.ListarRegistros();
+            int indiceBD = diarioRepositorio.ObtenerId(registros[id]);
+            return diarioRepositorio.getRegistro(indiceBD);
+        }
     }
 }
