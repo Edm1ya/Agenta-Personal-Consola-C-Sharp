@@ -11,7 +11,7 @@ namespace DiarioPersonal.AccesoDatos
         private string usuario = "sa";
         private string password =  "123";
 
-        private string cadenaConexion;
+        private string? cadenaConexion;
         public SqlConnection CrearConexion()
         {
             cadenaConexion = $"Data Source={servidor}; Initial Catalog={basedatos}; User={usuario};Password={password};Encrypt=False;";
